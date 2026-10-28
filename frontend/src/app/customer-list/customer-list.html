@@ -1,0 +1,40 @@
+<div class="page">
+  <div class="header">
+    <h1>Customers</h1>
+    <div>
+      <button routerLink="/customers/new">Add customer</button>
+      <button (click)="logout()">Log out</button>
+    </div>
+  </div>
+
+  @if (errorMessage()) {
+    <p class="error">{{ errorMessage() }}</p>
+  }
+
+  <table>
+    <thead>
+      <tr>
+        <th>Customer number</th>
+        <th>Name</th>
+        <th>Date of birth</th>
+        <th>Gender</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (customer of customers(); track customer.id) {
+        <tr>
+          <td>{{ customer.customerNumber }}</td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.dateOfBirth }}</td>
+          <td>{{ customer.gender }}</td>
+          <td><button [routerLink]="['/customers', customer.id, 'edit']">Edit</button></td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5">No customers yet.</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

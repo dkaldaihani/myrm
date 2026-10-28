@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+}
+
+input,
+select,
+button {
+  font: inherit;
+  padding: 6px 10px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.error {
+  color: #c62828;
+}

@@ -1,0 +1,21 @@
+<div class="login-box">
+  <h1>MyRM</h1>
+
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+    <label>
+      Username
+      <input name="username" [(ngModel)]="username" required />
+    </label>
+
+    <label>
+      Password
+      <input name="password" type="password" [(ngModel)]="password" required />
+    </label>
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    <button type="submit" [disabled]="loginForm.invalid">Log in</button>
+  </form>
+</div>

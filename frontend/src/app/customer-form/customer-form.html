@@ -1,0 +1,48 @@
+<div class="form-box">
+  <h1>{{ customerId ? 'Edit customer' : 'Add customer' }}</h1>
+
+  @if (customerNumber()) {
+    <p>Customer number: <strong>{{ customerNumber() }}</strong></p>
+  }
+
+  <!-- novalidate: let Angular show our messages instead of the browser's pop-ups. -->
+  <form #customerForm="ngForm" (ngSubmit)="onSave(customerForm)" novalidate>
+    <label>
+      Name
+      <input name="name" [(ngModel)]="name" #nameField="ngModel" required maxlength="255" pattern=".*\S.*" />
+    </label>
+    @if (nameField.invalid && nameField.touched) {
+      <p class="error">Name is required (max 255 characters).</p>
+    }
+
+    <label>
+      Date of birth
+      <input name="dateOfBirth" type="date" [(ngModel)]="dateOfBirth" #dobField="ngModel" required />
+    </label>
+    @if (dobField.invalid && dobField.touched) {
+      <p class="error">Date of birth is required.</p>
+    }
+
+    <label>
+      Gender
+      <select name="gender" [(ngModel)]="gender" #genderField="ngModel" required>
+        <option value="">-- choose --</option>
+        <option value="M">M</option>
+        <option value="F">F</option>
+      </select>
+    </label>
+    @if (genderField.invalid && genderField.touched) {
+      <p class="error">Gender is required.</p>
+    }
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+    @if (successMessage()) {
+      <p class="success">{{ successMessage() }}</p>
+    }
+
+    <button type="submit">Save</button>
+    <button type="button" routerLink="/customers">Cancel</button>
+  </form>
+</div>
